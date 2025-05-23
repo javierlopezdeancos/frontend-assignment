@@ -1,11 +1,11 @@
 import { createRoute } from '@tanstack/react-router'
 import rootRoute from '../root-route.tsx';
-import MoviesPage from './movies-page.tsx';
+import ShowsPage from './shows-page.tsx';
 
 
 export const moviesRoute = createRoute({
   path: '/',
-  component: MoviesPage,
+  component: ShowsPage,
   getParentRoute: () => rootRoute,
 })
 
