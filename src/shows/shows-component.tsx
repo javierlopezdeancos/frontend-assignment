@@ -41,9 +41,9 @@ function ShowsComponent({ shows, className }: { shows: Shows[]; className?: stri
 
   return (
     <main className={`w-full flex flex-col items-start justify-center gap-4 overflow-hidden ${className}`}>
-      <article id="shows-list" className="w-full my-0 ml-0 [&>li]:mt-0 flex-1 px-10 flex flex-col gap-4 overflow-auto">
+      <article id="shows-list" className="w-full my-0 ml-0 [&>li]:mt-0 flex-1 flex flex-col gap-4 overflow-auto">
         {pageShows.map((s: Shows) => (
-          <CardComponent className="px-5" key={s.id}>
+          <CardComponent key={s.id}>
             <div key={s.id} className="flex items-start justify-start gap-4">
               <LazyLoadImageComponent
                 image={{
