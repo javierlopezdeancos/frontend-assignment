@@ -2,10 +2,11 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import rootRoute from '@/routes/root-route.tsx'
-import moviesRoute from '@/routes/shows/shows-route'
+import showsRoute from '@/routes/shows/shows-route.ts'
+import showRoute from './routes/show/show-route.ts'
 import ErrorBoundaryComponent from '@/components/error-boundary/error-boundary-component.tsx'
 
-const routeTree = rootRoute.addChildren([moviesRoute])
+const routeTree = rootRoute.addChildren([showsRoute, showRoute])
 const router = createRouter({ routeTree })
 
 declare module '@tanstack/react-router' {
