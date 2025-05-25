@@ -8,37 +8,13 @@ import TypographyHeader3Component from '@/components/typography/typography-heade
 import LazyLoadImageComponent from '@/components/lazy-load-image/lazy-load-image-component.tsx'
 import BadgeComponent from '@/components/badge/badge-component.tsx'
 import SeparatorComponent from '@/components/separator/separator-component.tsx'
-
-function getYear(date?: string): string | undefined {
-  if (!date) {
-    return;
-  }
-
-  return date.split("-")[0];
-}
-
-type EnglishDaysOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
-
-type SpanishDayOfWeek = "Lunes" | "Martes" | "Miércoles" | "Jueves" | "Viernes" | "Sábado" | "Domingo";
-
-const translationDaysOfWeek: Record<EnglishDaysOfWeek, SpanishDayOfWeek> = {
-  Monday: "Lunes",
-  Tuesday: "Martes",
-  Wednesday: "Miércoles",
-  Thursday: "Jueves",
-  Friday: "Viernes",
-  Saturday: "Sábado",
-  Sunday: "Domingo"
-} as const
-
-function getSpanishDayOfWeek(englishDayOfWeek: EnglishDaysOfWeek): SpanishDayOfWeek {
-  return translationDaysOfWeek[englishDayOfWeek]
-}
+import getYearHelper from '@/helpers/get-year-helper.ts'
+import getSpanishDayOfWeekHelper, { type EnglishDaysOfWeek } from '@/helpers/get-spanish-day-of-week-helper.ts'
 
 function ShowComponent({ show, className }: { show: Show; className?: string }): React.ReactElement {
-  const premieredYear = getYear(show.premiered)
-  const endedYear = getYear(show.ended)
-  const spanishDayOfTheWeek = getSpanishDayOfWeek(show.schedule.days[0] as EnglishDaysOfWeek)
+  const premieredYear = getYearHelper(show.premiered)
+  const endedYear = getYearHelper(show.ended)
+  const spanishDayOfTheWeek = getSpanishDayOfWeekHelper(show.schedule.days[0] as EnglishDaysOfWeek)
 
   return (
     <main className={`w-full px-10 py-5 flex flex-col items-start justify-start gap-4 overflow-hidden ${className}`}>

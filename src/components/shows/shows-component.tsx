@@ -14,6 +14,7 @@ import {
 } from "@/components/pagination/pagination-component.tsx"
 import CardComponent from "@/components/card/card-component.tsx"
 import LazyLoadImageComponent from '@/components/lazy-load-image/lazy-load-image-component.tsx'
+import getScapedTextHelper from "@/helpers/get-scaped-text-helper.ts"
 
 function ShowsComponent({ shows, className }: { shows: Show[]; className?: string }): React.ReactElement {
   const [page, setPage] = useState<number>(0)
@@ -44,9 +45,9 @@ function ShowsComponent({ shows, className }: { shows: Show[]; className?: strin
     <main className={`w-full flex flex-col items-start justify-center gap-4 overflow-hidden ${className}`}>
       <article id="shows-list" className="w-full my-0 ml-0 [&>li]:mt-0 flex-1 flex flex-col gap-0 overflow-auto">
         {pageShows.map((s: Show) => (
-          <Link to="/show/$id" params={{ id: String(s.id) }} className="not-last:border-b-1 not-last:border-b-slate-200 hover:bg-gray-50">
-            <CardComponent key={s.id}>
-              <div key={s.id} className="flex items-start justify-start gap-4">
+          <Link key={s.id} id={`shows-list-${s.id}`} to="/show/$id" params={{ id: String(s.id) }} className="not-last:border-b-1 not-last:border-b-slate-200 hover:bg-gray-50">
+            <CardComponent>
+              <div className="flex items-start justify-start gap-4">
                 <LazyLoadImageComponent
                   image={{
                     alt: s.name,
@@ -57,7 +58,9 @@ function ShowsComponent({ shows, className }: { shows: Show[]; className?: strin
                 />
                 <div className="flex flex-col items-start justify-start gap-2">
                   <TypographyHeader3Component>{s.name}</TypographyHeader3Component>
-                  <TypographyParagraphComponent>{s.summary.replace(/[\u{0080}-\u{FFFF}]/gu,"")}</TypographyParagraphComponent>
+                  <TypographyParagraphComponent>
+                    {getScapedTextHelper(s.summary)}
+                  </TypographyParagraphComponent>
                 </div>
               </div>
             </CardComponent>
