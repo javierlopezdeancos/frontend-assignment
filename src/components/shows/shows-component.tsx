@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from '@tanstack/react-router'
 import { Pagination } from "react-headless-pagination"
 import TypographyParagraphComponent from '@/components/typography/typography-paragraph-component.tsx'
 import TypographyHeader3Component from '@/components/typography/typography-header-3-component.tsx'
-import { type Shows } from '@/shows/shows'
+import { type Show } from '@/shows/shows'
 import {
   PaginationComponent,
   PaginationContentComponent,
@@ -14,9 +15,9 @@ import {
 import CardComponent from "@/components/card/card-component.tsx"
 import LazyLoadImageComponent from '@/components/lazy-load-image/lazy-load-image-component.tsx'
 
-function ShowsComponent({ shows, className }: { shows: Shows[]; className?: string }): React.ReactElement {
+function ShowsComponent({ shows, className }: { shows: Show[]; className?: string }): React.ReactElement {
   const [page, setPage] = useState<number>(0)
-  const [pageShows, setPageShows] = useState<Shows[]>([])
+  const [pageShows, setPageShows] = useState<Show[]>([])
 
   const pageSize: number = 20
 
@@ -41,25 +42,26 @@ function ShowsComponent({ shows, className }: { shows: Shows[]; className?: stri
 
   return (
     <main className={`w-full flex flex-col items-start justify-center gap-4 overflow-hidden ${className}`}>
-      <article id="shows-list" className="w-full my-0 ml-0 [&>li]:mt-0 flex-1 flex flex-col gap-4 overflow-auto">
-        {pageShows.map((s: Shows) => (
-          <CardComponent key={s.id}>
-            <div key={s.id} className="flex items-start justify-start gap-4">
-              <LazyLoadImageComponent
-                image={{
-                  alt: s.name,
-                  height: 200,
-                  src: s.image?.medium || '',
-                  width: 100,
-                }}
-              />
-              <div className="flex flex-col items-start justify-start gap-2">
-                <TypographyHeader3Component>{s.name}</TypographyHeader3Component>
-                <TypographyParagraphComponent>{s.summary.replace(/[\u{0080}-\u{FFFF}]/gu,"")}</TypographyParagraphComponent>
+      <article id="shows-list" className="w-full my-0 ml-0 [&>li]:mt-0 flex-1 flex flex-col gap-0 overflow-auto">
+        {pageShows.map((s: Show) => (
+          <Link to="/show/$id" params={{ id: String(s.id) }} className="not-last:border-b-1 not-last:border-b-slate-200 hover:bg-gray-50">
+            <CardComponent key={s.id}>
+              <div key={s.id} className="flex items-start justify-start gap-4">
+                <LazyLoadImageComponent
+                  image={{
+                    alt: s.name,
+                    height: 200,
+                    src: s.image?.medium || '',
+                    width: 100,
+                  }}
+                />
+                <div className="flex flex-col items-start justify-start gap-2">
+                  <TypographyHeader3Component>{s.name}</TypographyHeader3Component>
+                  <TypographyParagraphComponent>{s.summary.replace(/[\u{0080}-\u{FFFF}]/gu,"")}</TypographyParagraphComponent>
+                </div>
               </div>
-
-            </div>
-          </CardComponent>
+            </CardComponent>
+          </Link>
         ))}
       </article>
       <Pagination

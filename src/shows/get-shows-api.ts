@@ -1,6 +1,6 @@
-import { type Shows } from './shows.ts';
+import { type Show } from './shows.ts';
 
-async function getShowsApi(): Promise<Shows[]> {
+async function getShowsApi(): Promise<Show[]> {
   const response = await fetch('https://api.tvmaze.com/shows');
 
   if (!response.ok) {
