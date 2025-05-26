@@ -100,10 +100,15 @@ npm run test:e2e
 
 ### Next improvements
 
-- [] Add more end to end coverage test to the most valuable use cases
-  - [] Test shows pagination feature
-  - [] Test add to favorite feature
-- [] Add playwright component testing
-- [] Promote some repeated structure in `show-component.ts` to their own common component
-- [] Add skeletons in `shows-component.ts` and `show-component.ts` at loading data time
-- [] Dockerize the app
+- [ ] Add new features
+  - [ ] Shows list should have filters ( by favorites ... ), sort ( by date ... ) and search
+- [ ] Apply some fixes 
+  - [ ] Pagination should set an active class into the current page number
+  - [ ] Should be a way to come back from show detail to shows list whitout press browser navigation arrows 
+- [ ] Add more end to end coverage test to the most valuable use cases
+  - [ ] Test shows pagination feature
+  - [ ] Test add to favorite feature
+- [ ] Add playwright component testing
+- [ ] Promote some repeated structure in `show-component.ts` to their own common component
+- [ ] Add skeletons in `shows-component.ts` and `show-component.ts` at loading data time
+- [ ] Dockerize the app
